@@ -873,7 +873,7 @@ if [[ ${EXISTS_DEPLOY_HEKETI} -eq 1 ]] && [[ ${EXISTS_HEKETI} -eq 0 ]]; then
     exit 1
   fi
 
-  check pods "job-name=heketi-storage-copy-job" "Completed"
+  eval_output "${CLI} wait --for=condition=complete job/heketi-storage-copy-job 2>&1"
   if [[ ${?} != 0 ]]; then
     output "Error waiting for job 'heketi-storage-copy-job' to complete."
     exit 1
